@@ -24,8 +24,28 @@ app.use(bodyParser.json());
 //mongoose promise
 mongoose.Promise = global.Promise;
 
-app.get('/blog-post', (req, res) => {
-    res.send('ok');
+app.get('/blog-posts', (req, res) => {
+    BlogPost
+    .find()
+    .exec()
+    .then(Blogposts => {
+        console.log(Blogposts);
+        res.json(
+            Blogposts.map(post => post.apiRepr())
+        );
+    })
+    .catch(
+        err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'});
+        });
+
+});
+
+
+//any other route goes to 404
+app.use('*', function(req, res) {
+  res.status(404).json({message: 'Not Found'});
 });
 
 
@@ -51,7 +71,23 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 }
 
 // `closeServer` function is here in original code
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+     return new Promise((resolve, reject) => {
+       console.log('Closing server');
+       server.close(err => {
+           if (err) {
+               return reject(err);
+           }
+           resolve();
+       });
+     });
+  });
+}
+
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 };
+
+module.exports = {runServer, app, closeServer};
