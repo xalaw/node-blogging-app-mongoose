@@ -1,0 +1,31 @@
+{
+  "name": "node-blogging-app-mongoose",
+  "version": "1.0.0",
+  "description": "Node Blogging App",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1",
+    "morgan": "^1.8.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xalaw/node-blogging-app-mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xalaw/node-blogging-app-mongoose/issues"
+  },
+  "homepage": "https://github.com/xalaw/node-blogging-app-mongoose#readme"
+}
